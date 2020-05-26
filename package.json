@@ -1,0 +1,28 @@
+{
+  "name": "zansder-site-next-node",
+  "version": "1.0.0",
+  "description": "个人博客服务端代码",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZAnsder/zansder-site-next-node.git"
+  },
+  "author": "zhangxu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZAnsder/zansder-site-next-node/issues"
+  },
+  "homepage": "https://github.com/ZAnsder/zansder-site-next-node#readme",
+  "dependencies": {
+    "@koa/router": "^8.0.8",
+    "koa": "^2.12.0",
+    "koa-bodyparser": "^4.3.0",
+    "mongoose": "^5.9.16"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
