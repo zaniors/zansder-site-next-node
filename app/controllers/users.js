@@ -7,7 +7,6 @@ class UsersCtl {
 
   async findById(ctx) {
     const user = await userModel.findById(ctx.params.id)
-
     if (!user) {
       ctx.throw(404, '该用户不存在')
     }
@@ -15,7 +14,8 @@ class UsersCtl {
   }
 
   async create(ctx) {
-    
+    const user = await (await userModel.create(ctx.request.body)).save()
+    ctx.body = user
   }
 }
 

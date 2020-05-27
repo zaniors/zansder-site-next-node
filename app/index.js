@@ -4,6 +4,8 @@ const bodyParser = require('koa-bodyparser');
 const mongoose = require('mongoose')
 const registerRoutes = require('./routes')
 const config = require('./config')
+const error = require('koa-json-error')
+const { postFormat } = require('./json-error')
 
 mongoose.connect(config.addr, {
   useNewUrlParser: true,
@@ -12,6 +14,7 @@ mongoose.connect(config.addr, {
 mongoose.connection.on('error', console.error)
 
 app
+  .use(error({ postFormat }))
   .use(bodyParser())
   .use(registerRoutes())
   .listen(9200, console.log('listen port on 9200!'))
