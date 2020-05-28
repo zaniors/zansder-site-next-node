@@ -17,4 +17,4 @@ app
   .use(error({ postFormat }))
   .use(bodyParser())
   .use(registerRoutes())
-  .listen(9200, console.log('listen port on 9200!'))
+  .listen(config.port, console.log(`listen port on ${config.port}!`))

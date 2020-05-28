@@ -4,7 +4,8 @@
   "description": "个人博客服务端代码",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "cross-env NODE_ENV=production node app",
+    "dev": "nodemon app"
   },
   "repository": {
     "type": "git",
