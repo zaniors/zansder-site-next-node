@@ -1,11 +1,11 @@
 const Router = require('@koa/router')
 const usersCtl = require('../controllers/users')
+const auth = require('../auth')
 const router = new Router({ prefix: '/users' })
-const auth = jwt({ secret: 'zansder_blog' })
 
 router.post('/', usersCtl.create)
-router.delete('/:id', auth, usersCtl.delete)
-router.patch('/:id', auth, usersCtl.update)
+router.delete('/:id', auth.jwtAuth, auth.limitAuth, usersCtl.delete)
+router.patch('/:id', auth.jwtAuth, auth.limitAuth, usersCtl.update)
 router.get('/', usersCtl.find)
 router.get('/:id', usersCtl.findById)
 
