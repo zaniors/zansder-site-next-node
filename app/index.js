@@ -1,6 +1,8 @@
 const Koa = require('koa')
 const app = new Koa()
-const bodyParser = require('koa-bodyparser');
+const path = require('path')
+const koaBody = require('koa-body');
+const koaStatic = require('koa-static')
 const mongoose = require('mongoose')
 const error = require('koa-json-error')
 const parameter = require('koa-parameter');
@@ -16,7 +18,14 @@ mongoose.connection.on('error', console.error)
 
 app
   .use(error({ postFormat }))
-  .use(bodyParser())
+  .use(koaStatic(__dirname + '/public'))
+  .use(koaBody({
+    multipart: true,
+    formidable: {
+      uploadDir: __dirname + '/public/upload',
+      keepExtensions: true
+    }
+  }))
   .use(parameter(app))
   .use(registerRoutes())
   .listen(config.port, console.log(`listen port on ${config.port}!`))
