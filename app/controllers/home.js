@@ -2,7 +2,7 @@ const path = require('path')
 
 class HomeCtl {
   index(ctx) {
-    ctx.body = '我是首页'
+    ctx.body = '欢迎来到我的博客接口，谢谢'
   }
 
   /**

@@ -8,8 +8,8 @@ function registerRoutes() {
       if (file === 'index.js') {
         return
       }
-      const router = require(`./${file}`)
-      app.use(router.routes())
+      const route = require(`./${file}`)
+      app.use(route.routes()).use(route.allowedMethods())
     })
 
     await next()
