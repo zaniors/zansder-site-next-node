@@ -13,8 +13,9 @@ const { postFormat } = require('./json-error')
 mongoose.connect(config.addr, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}, console.log('mongodb connection successful!'))
+})
 mongoose.connection.on('error', console.error)
+mongoose.connection.on('open', () => console.log('mongodb connection successful!'))
 
 app
   .use(error({ postFormat }))
@@ -28,4 +29,4 @@ app
   }))
   .use(parameter(app))
   .use(registerRoutes())
-  .listen(config.port, console.log(`listen port on ${config.port}!`))
+  .listen(config.port, console.log(`${process.env.NODE_ENV}, listen port on ${config.port}!`))
