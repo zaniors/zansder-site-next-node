@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@koa/cors@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.npm.taobao.org/@koa/cors/download/@koa/cors-3.1.0.tgz#618bb073438cfdbd3ebd0e648a76e33b84f3a3b2"
+  integrity sha1-YYuwc0OM/b0+vQ5kinbjO4Tzo7I=
+  dependencies:
+    vary "^1.1.2"
+
 "@koa/router@^8.0.8":
   version "8.0.8"
   resolved "https://registry.npm.taobao.org/@koa/router/download/@koa/router-8.0.8.tgz#95f32d11373d03d89dcb63fabe9ac6f471095236"

@@ -1,14 +1,14 @@
 const Koa = require('koa')
 const app = new Koa()
-const path = require('path')
 const koaBody = require('koa-body');
 const koaStatic = require('koa-static')
 const mongoose = require('mongoose')
 const error = require('koa-json-error')
 const parameter = require('koa-parameter');
+const cors = require('@koa/cors');
 const registerRoutes = require('./routes')
 const config = require('./config')
-const { postFormat } = require('./json-error')
+const { postFormat } = require('./utils/json-error')
 
 mongoose.connect(config.addr, {
   useNewUrlParser: true,
@@ -17,7 +17,18 @@ mongoose.connect(config.addr, {
 mongoose.connection.on('error', console.error)
 mongoose.connection.on('open', () => console.log('mongodb connection successful!'))
 
+
 app
+  .use(registerRoutes())
+  .use(cors({
+    origin: (ctx) => {
+      if (ctx.request.header.origin.includes('api.compelcode.com')) {
+        return 'http://api.compelcode.com'
+      }
+
+      return '*'
+    }
+  }))
   .use(error({ postFormat }))
   .use(koaStatic(__dirname + '/public'))
   .use(koaBody({
@@ -28,5 +39,4 @@ app
     }
   }))
   .use(parameter(app))
-  .use(registerRoutes())
   .listen(config.port, console.log(`${process.env.NODE_ENV}, listen port on ${config.port}!`))
