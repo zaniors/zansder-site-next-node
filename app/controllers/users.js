@@ -5,7 +5,7 @@ class UsersCtl {
   async create(ctx) {
     // 对请求参数校验，创建用户时name、password为必选
     ctx.verifyParams({
-      name: {
+      username: {
         type: 'string',
         required: true
       },
@@ -16,7 +16,7 @@ class UsersCtl {
     })
 
     // 创建用户之前去数据库查找是否存在该用户，存在则不新建用户并返回409状态码
-    const { name } = ctx.request.body
+    const { username } = ctx.request.body
     const repeatedUser = await Users.findOne({ name })
     if (repeatedUser) {
       ctx.throw(409, '用户已经存在')
@@ -40,7 +40,7 @@ class UsersCtl {
   async update(ctx) {
     // 对请求参数校验，可以指定更新，参数都为可选
     ctx.verifyParams({
-      name: {
+      username: {
         type: 'string',
         required: false
       },
@@ -77,7 +77,7 @@ class UsersCtl {
   async login(ctx) {
     // 对请求参数校验，用户登录时name、password为必选
     ctx.verifyParams({
-      name: {
+      username: {
         type: 'string',
         required: true
       },
@@ -96,8 +96,8 @@ class UsersCtl {
       ctx.throw(401, '用户名或者密码错误')
     }
 
-    const { _id, name } = user
-    const token = jwt.sign({ _id, name }, 'zansder_blog', { expiresIn: '10m' })
+    const { _id, username } = user
+    const token = jwt.sign({ _id, username }, 'zansder_blog', { expiresIn: '10m' })
     ctx.body = { token }
   }
 }

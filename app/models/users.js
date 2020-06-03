@@ -5,7 +5,7 @@ const userSchema = new Schema({
     type: Number,
     select: false
   },
-  name: {
+  username: {
     type: String,
     required: true
   },
@@ -13,6 +13,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     select: false // 密码不被查询出去
+  },
+  remember: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
