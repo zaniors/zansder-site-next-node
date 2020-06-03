@@ -8,7 +8,8 @@ const parameter = require('koa-parameter');
 const cors = require('@koa/cors');
 const registerRoutes = require('./routes')
 const config = require('./config')
-const { postFormat } = require('./utils/json-error')
+const { postFormat, formatError: format } = require('./utils/json-error')
+const jsonResponse = require('./utils/json-response')
 
 mongoose.connect(config.addr, {
   useNewUrlParser: true,
@@ -19,6 +20,7 @@ mongoose.connection.on('open', () => console.log('mongodb connection successful!
 
 
 app
+  .use(jsonResponse())
   .use(registerRoutes())
   .use(cors({
     origin: (ctx) => {
@@ -29,7 +31,7 @@ app
       return '*'
     }
   }))
-  .use(error({ postFormat }))
+  .use(error({ postFormat, format }))
   .use(koaStatic(__dirname + '/public'))
   .use(koaBody({
     multipart: true,
