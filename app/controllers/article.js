@@ -20,6 +20,10 @@ class ArticleCtl {
         type: 'string',
         required: false
       },
+      content: {
+        type: 'string',
+        required: false
+      },
     })
 
     const article = await new Article(ctx.request.body).save()

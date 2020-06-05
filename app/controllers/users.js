@@ -97,7 +97,7 @@ class UsersCtl {
     }
 
     const { _id, username } = user
-    const token = jwt.sign({ _id, username }, 'zansder_blog', { expiresIn: '10m' })
+    const token = jwt.sign({ _id, username }, 'zansder_blog', { expiresIn: '24h' })
     ctx.body = { token }
   }
 }

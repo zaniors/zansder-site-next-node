@@ -11,6 +11,7 @@ const articleSchema = new Schema({
   },
   intro: String,
   cover: String,
+  content: String,
   createTime: {
     type: Date,
     default: new Date()
