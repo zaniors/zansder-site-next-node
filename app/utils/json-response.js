@@ -3,7 +3,7 @@ const jsonResponse = () => {
     await next()
     const code = ctx.status
     const data = ctx.body
-    if (ctx.method.toLowerCase !== 'option' && code === 200) {
+    if (ctx.method.toLowerCase !== 'option' && code === 200 && !ctx.url.includes('/upload/')) {
       ctx.body = {
         data,
         code
