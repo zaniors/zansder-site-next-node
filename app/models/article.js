@@ -1,10 +1,6 @@
 const { Schema, model } = require('mongoose')
 
 const articleSchema = new Schema({
-  __v: {
-    type: Number,
-    select: false
-  },
   title: {
     type: String,
     required: true
