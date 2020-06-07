@@ -1,4 +1,5 @@
 const path = require('path')
+const config = require('../config')
 
 class HomeCtl {
   index(ctx) {
@@ -12,9 +13,7 @@ class HomeCtl {
   upload(ctx) {
     const { file } = ctx.request.files
     const basename = path.basename(file.path);
-    console.log(ctx)
-    console.log(ctx.host, 'ctx.host')
-    ctx.body = { url: `http://${ctx.host}/upload/${basename}` };
+    ctx.body = { url: `${config.img_prefix}/upload/${basename}` };
   }
 }
 
