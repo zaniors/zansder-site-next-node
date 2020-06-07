@@ -12,7 +12,9 @@ class HomeCtl {
   upload(ctx) {
     const { file } = ctx.request.files
     const basename = path.basename(file.path);
-    ctx.body = { url: `http//${ctx.host}/upload/${basename}` };
+    console.log(ctx)
+    console.log(ctx.host, 'ctx.host')
+    ctx.body = { url: `http://${ctx.host}/upload/${basename}` };
   }
 }
 
