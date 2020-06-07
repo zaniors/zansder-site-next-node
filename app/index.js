@@ -14,10 +14,12 @@ const jsonResponse = require('./utils/json-response')
 mongoose.set('toJSON', {
   virtuals: true,
   transform: (doc, converted) => {
-    delete converted._id;
-    delete converted.__v;
+    delete converted._id
+    delete converted.__v
+    return converted
   }
 });
+
 mongoose.connect(config.addr, {
   useNewUrlParser: true,
   useUnifiedTopology: true

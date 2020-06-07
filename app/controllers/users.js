@@ -17,7 +17,7 @@ class UsersCtl {
 
     // 创建用户之前去数据库查找是否存在该用户，存在则不新建用户并返回409状态码
     const { username } = ctx.request.body
-    const repeatedUser = await Users.findOne({ name })
+    const repeatedUser = await Users.findOne({ username })
     if (repeatedUser) {
       ctx.throw(409, '用户已经存在')
     }
