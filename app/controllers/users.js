@@ -96,8 +96,8 @@ class UsersCtl {
       ctx.throw(401, '用户名或者密码错误')
     }
 
-    const { _id, username } = user
-    const token = jwt.sign({ _id, username }, 'zansder_blog', { expiresIn: '24h' })
+    const { id, username } = user
+    const token = jwt.sign({ id, username }, 'zansder_blog', { expiresIn: '24h' })
     ctx.body = { token }
   }
 }
