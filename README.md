@@ -1,4 +1,5 @@
 # 基于Node+MongoDB搭建的个人博客网站服务端
+[![Build Status](https://travis-ci.org/ZAnsder/zansder-site-next-node.svg?branch=master)](https://travis-ci.org/ZAnsder/zansder-site-next-node)
 
 ## 项目技术栈
 - [x] node(常见的模块path、fs等)
