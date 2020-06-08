@@ -31,8 +31,8 @@ app
   .use(registerRoutes())
   .use(cors({
     origin: (ctx) => {
-      if (ctx.request.header.origin.includes('api.compelcode.com')) {
-        return 'http://api.compelcode.com'
+      if (process.env.NODE_ENV === 'production') {
+        return 'http://admin.compelcode.com'
       }
 
       return '*'
