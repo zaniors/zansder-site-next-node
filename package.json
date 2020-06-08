@@ -5,7 +5,8 @@
   "main": "app/index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node app",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "test": "echo test node server"
   },
   "repository": {
     "type": "git",
