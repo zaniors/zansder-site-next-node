@@ -12,5 +12,5 @@ before_install:
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
 after_success:
-- ssh -p 2022 travis@compelcode.com -o stricthostkeychecking=no 'cd /www/zhangxu/zansder-site-next-node/ && git pull && HOME=/var/pm2 pm2 listpm2 reload app'
+- ssh -p 2022 travis@compelcode.com -o stricthostkeychecking=no 'cd /www/zhangxu/zansder-site-next-node/ && git pull && HOME=/var/pm2 pm2 reload app'
 
