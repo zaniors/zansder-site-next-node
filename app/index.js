@@ -27,6 +27,15 @@ mongoose.connection.on('open', () => console.log('mongodb connection successful!
 
 
 app
+  .use(koaBody({
+    multipart: true,
+    formidable: {
+      // 设置文件上传本地目录，开发环境不开启本地上传
+      uploadDir: process.env.NODE_ENV === 'development' ? null : __dirname + '/public/upload',
+      keepExtensions: true
+    }
+  }))
+  .use(koaStatic(__dirname + '/public'))
   .use(jsonResponse())
   .use(registerRoutes())
   .use(cors({
@@ -39,13 +48,5 @@ app
     }
   }))
   .use(error({ postFormat, format }))
-  .use(koaStatic(__dirname + '/public'))
-  .use(koaBody({
-    multipart: true,
-    formidable: {
-      uploadDir: __dirname + '/public/upload',
-      keepExtensions: true
-    }
-  }))
   .use(parameter(app))
   .listen(config.port, console.log(`${process.env.NODE_ENV}, listen port on ${config.port}!`))
