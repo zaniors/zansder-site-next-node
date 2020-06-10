@@ -5,6 +5,6 @@ const auth = require('../auth')
 const router = new Router()
 
 router.get('/', homeCtl.index)
-router.post('/upload', auth.jwtAuth, homeCtl.upload)
+router.post('/upload', homeCtl.upload)
 
 module.exports = router
