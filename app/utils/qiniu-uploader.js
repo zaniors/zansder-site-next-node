@@ -1,7 +1,8 @@
 const qiniu = require('qiniu')
+const qiniuConfig = require('../config/qiniu.config')
 
-qiniu.conf.ACCESS_KEY = 'p6oilamckbozaQPgnd2DnEzbA_sFz-bBQTfB23lD'
-qiniu.conf.SECRET_KEY = 'SZwaNoyVNUi5mC7HMwKgx9muxaZt4Ck8WoFys0sO'
+qiniu.conf.ACCESS_KEY = qiniuConfig.access_key
+qiniu.conf.SECRET_KEY = qiniuConfig.secret_key
 
 class QiniuUploader {
   /**
@@ -17,7 +18,7 @@ class QiniuUploader {
   }
 
   uploadFile(filename, localFile) {
-    const bucket = 'cdn'
+    const bucket = qiniuConfig.bucket
     const config = new qiniu.conf.Config({
       zone: qiniu.zone.Zone_z2
     })
@@ -25,15 +26,19 @@ class QiniuUploader {
     const extra = new qiniu.form_up.PutExtra()
     const token = this.uptoken(bucket, filename)
 
-    formUploader.putFile(token, filename, localFile, extra, function (err, ret) {
-      if (!err) {
-        // 上传成功， 处理返回值
-        console.log(ret.hash, ret.key, ret.persistentId, 'success')
-      } else {
-        // 上传失败， 处理返回代码
-        console.log(err, 'error')
-      }
-    });
+    return new Promise((resolve, reject) => {
+      formUploader.putFile(token, filename, localFile, extra, function (err, ret, info) {
+        if (err) {
+          reject(err)
+        } else {
+          if (info.statusCode === 200) {
+            resolve(ret.key)
+          } else {
+            reject(ret.error)
+          }
+        }
+      });
+    })
   }
 }
 

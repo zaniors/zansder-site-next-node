@@ -11,14 +11,17 @@ class HomeCtl {
    * 上传文件
    * @param {*} ctx koa ctx
    */
-  upload(ctx) {
+  async upload(ctx) {
     // 生产环境使用七牛云上传，开发环境则使用KoaBody中间件上传
-
-    if (process.env.NODE_ENV === 'development') {
-      const { file } = ctx.request.files
-      const basename = path.basename(file.path)
-      qiniuUploader.uploadFile(basename, file.path)
-      ctx.body = '上传成功'
+    if (process.env.NODE_ENV === 'production') {
+      try {
+        const { file } = ctx.request.files
+        const basename = path.basename(file.path)
+        const data = await qiniuUploader.uploadFile(basename, file.path)
+        ctx.body = { url: `${config.img_prefix}/${data}` }
+      } catch (error) {
+        ctx.throw(error)
+      }
       return
     }
 

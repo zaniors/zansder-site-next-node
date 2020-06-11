@@ -31,7 +31,7 @@ app
     multipart: true,
     formidable: {
       // 设置文件上传本地目录，开发环境不开启本地上传
-      uploadDir: process.env.NODE_ENV === 'development' ? null : __dirname + '/public/upload',
+      uploadDir: process.env.NODE_ENV === 'production' ? null : __dirname + '/public/upload',
       keepExtensions: true
     }
   }))

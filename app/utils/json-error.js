@@ -1,5 +1,4 @@
 function formatError(err) {
-  console.log(err)
   return {
     code: err.status,
     message: err.message,
